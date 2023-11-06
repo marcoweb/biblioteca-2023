@@ -3,7 +3,6 @@ package application.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +49,7 @@ public class LivroController {
         return "redirect:/livro/list";
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(
         @RequestParam("id") int id,
         Model model
@@ -59,6 +58,7 @@ public class LivroController {
 
         if(livro.isPresent()) {
             model.addAttribute("livro", livro.get());
+            model.addAttribute("generos", generoRepo.findAll());
             return "livro/update";
         }
 
